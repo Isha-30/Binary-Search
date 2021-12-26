@@ -1,0 +1,31 @@
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Set<Integer> s = new HashSet<>();
+        Arrays.sort(nums2);
+        for(int n : nums1){
+            if(BS(nums2, n))
+                s.add(n);
+        }
+        
+        int[] ans = new int[s.size()];
+        int k = 0;
+        for(int i : s)
+            ans[k++] = i;
+        return ans;
+        
+    }
+    
+    public boolean BS(int[] a, int n){
+        int low = 0, high = a.length-1;
+        while(low <= high){
+            int  mid = (low+high)/2;
+            if(a[mid]==n)
+                return true;
+            else if(a[mid] < n)
+                low = mid+1;
+            else
+                high = mid-1;
+        }
+        return false;      
+    }
+}
